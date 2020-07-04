@@ -1,6 +1,7 @@
 package com.tw.tdd.exam;
 
 import exception.ExceptionMessages;
+import exception.InvalidTicketException;
 import exception.StoreException;
 
 import java.util.ArrayList;
@@ -30,5 +31,18 @@ public class PrimaryLockerRobot {
 
     public List<Locker> getLockers() {
         return lockers;
+    }
+
+
+    public Bag pickUp(Ticket ticket) throws InvalidTicketException {
+        for (Locker locker : lockers) {
+            try {
+                return locker.pickUp(ticket);
+            } catch (InvalidTicketException e) {
+                continue;
+            }
+        }
+
+        throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
     }
 }

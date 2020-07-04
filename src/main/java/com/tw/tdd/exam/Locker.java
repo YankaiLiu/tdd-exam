@@ -1,6 +1,7 @@
 package com.tw.tdd.exam;
 
 import exception.ExceptionMessages;
+import exception.InvalidTicketException;
 import exception.StoreException;
 
 import java.util.HashMap;
@@ -41,5 +42,13 @@ public class Locker {
             return 1;
         }
         return ((double)(capacity - storedBags.size())) /  (double)capacity;
+    }
+
+    public Bag pickUp(Ticket ticket) throws InvalidTicketException {
+        if (storedBags.get(ticket) != null) {
+            return storedBags.get(ticket);
+        }
+
+        throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
     }
 }

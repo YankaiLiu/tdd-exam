@@ -1,5 +1,6 @@
 package com.tw.tdd.exam;
 import exception.ExceptionMessages;
+import exception.InvalidTicketException;
 import exception.StoreException;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -127,6 +128,20 @@ public class NormalCustomerTest {
         waitress.manage(superLockerRobot);
 
         waitress.store( new Bag(BagType.L));
+    }
+
+    @Test
+    public void should_get_bag_when_pick_up_bag_given_valid_s_ticket() throws StoreException, InvalidTicketException {
+
+        Locker lockerS = new Locker(LockerType.S, 10);
+        Waitress waitress = new Waitress();
+        waitress.manage(lockerS);
+
+        Bag bag = new Bag(BagType.S);
+        Ticket ticket = waitress.store(bag);
+        Bag pickedBag = waitress.pickUp(ticket);
+
+        Assert.assertNotNull(pickedBag);
     }
 
 }
