@@ -8,11 +8,11 @@ public class LockerRobotService {
 
     public static Ticket getTicket(Bag bag, Locker locker, PrimaryLockerRobot primaryLockerRobot,
                              SuperLockerRobot superLockerRobot) throws StoreException {
-        if (bag.getType() == BagType.S) {
+        if (bag.getType().equals(BagType.S)) {
             return locker.store(bag);
-        } else if (bag.getType() == BagType.M) {
+        } else if (bag.getType().equals(BagType.M)) {
             return primaryLockerRobot.store(bag);
-        } else if (bag.getType() == BagType.L) {
+        } else if (bag.getType().equals(BagType.L)) {
             return superLockerRobot.store(bag);
         }
         return null;
