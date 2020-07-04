@@ -5,4 +5,8 @@ public class Bag {
     public Bag(String type) {
         this.type = type;
     }
+
+    public String getType() {
+        return type;
+    }
 }

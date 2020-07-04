@@ -28,4 +28,8 @@ public class Locker {
     public boolean isNotFull() {
         return capacity > 0;
     }
+
+    public boolean containBag(Ticket ticket) {
+        return storedBags.get(ticket) != null;
+    }
 }
