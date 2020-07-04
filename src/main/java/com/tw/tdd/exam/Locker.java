@@ -26,7 +26,7 @@ public class Locker {
     }
 
     public boolean isNotFull() {
-        return capacity > 0;
+        return storedBags.size() < capacity;
     }
 
     public boolean containBag(Ticket ticket) {

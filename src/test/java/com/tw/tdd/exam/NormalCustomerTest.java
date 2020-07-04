@@ -33,8 +33,7 @@ public class NormalCustomerTest {
         Waitress waitress = new Waitress();
         waitress.manage(lockerS);
 
-        Bag bag = new Bag(BagType.S);
-        waitress.store(bag);
+        waitress.store(new Bag(BagType.S));
     }
 
     @Test
@@ -71,6 +70,24 @@ public class NormalCustomerTest {
         Ticket ticket = waitress.store(bag);
         Assert.assertEquals(LockerType.M, ticket.getType());
         Assert.assertTrue(primaryRobot.getLockers().get(1).containBag(ticket));
+    }
+
+    @Test
+    public void should_reminder_has_no_capacity_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_all_lockers_has_no_capacity() throws StoreException {
+
+        thrown.expect(StoreException.class);
+        thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
+
+        Locker lockerM1 = new Locker(LockerType.M, 0);
+        Locker lockerM2 = new Locker(LockerType.M, 0);
+        PrimaryRobot primaryRobot = new PrimaryRobot();
+        primaryRobot.manage(lockerM1);
+        primaryRobot.manage(lockerM2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(primaryRobot);
+
+        waitress.store(new Bag(BagType.M));
     }
 
 
