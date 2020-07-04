@@ -3,6 +3,7 @@ package com.tw.tdd.exam;
 import exception.ExceptionMessages;
 import exception.InvalidTicketException;
 import exception.StoreException;
+import exception.TicketTypeIncorrectException;
 
 public class Waitress {
 
@@ -43,4 +44,8 @@ public class Waitress {
         }
         throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
     }
-}
+
+    public void makeMistake(Ticket ticket) throws TicketTypeIncorrectException {
+        throw new TicketTypeIncorrectException(ExceptionMessages.INCORRECT_TICKET_TYPE);
+    }
+ }

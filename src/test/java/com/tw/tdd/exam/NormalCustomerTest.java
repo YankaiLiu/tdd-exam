@@ -2,6 +2,7 @@ package com.tw.tdd.exam;
 import exception.ExceptionMessages;
 import exception.InvalidTicketException;
 import exception.StoreException;
+import exception.TicketTypeIncorrectException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -182,6 +183,29 @@ public class NormalCustomerTest {
         Bag pickedBag = waitress.pickUp(ticket);
 
         Assert.assertNotNull(pickedBag);
+    }
+
+    @Test
+    public void should_reminder_ticket_type_is_incorrect_when_pick_up_bag_given_valid_ticket_but_incorrect_ticket_type() throws StoreException,
+            InvalidTicketException, TicketTypeIncorrectException {
+
+
+        thrown.expect(TicketTypeIncorrectException.class);
+        thrown.expectMessage(ExceptionMessages.INCORRECT_TICKET_TYPE);
+
+        Locker lockerL1 = new Locker(LockerType.L, 10);
+        Locker lockerL2 = new Locker(LockerType.L, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(superLockerRobot);
+
+        Bag bag = new Bag(BagType.L);
+        Ticket ticket = waitress.store(bag);
+
+        waitress.makeMistake(ticket);
     }
 
 }
