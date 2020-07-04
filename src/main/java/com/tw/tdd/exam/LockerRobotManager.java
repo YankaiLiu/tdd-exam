@@ -2,6 +2,7 @@ package com.tw.tdd.exam;
 
 import exception.ExceptionMessages;
 import exception.InvalidTicketException;
+import exception.NotVipException;
 import exception.StoreException;
 
 public class LockerRobotManager {
@@ -22,7 +23,12 @@ public class LockerRobotManager {
         this.superLockerRobot = robot;
     }
 
-    public Ticket store(Bag bag) throws StoreException {
+    public Ticket store(Bag bag, VipCard vipCard) throws StoreException, NotVipException {
+
+        if (vipCard == null) {
+            throw new NotVipException(ExceptionMessages.IS_NOT_VIP);
+        }
+
         if (bag.getType() == BagType.S) {
             return locker.store(bag);
         } else if (bag.getType() == BagType.M) {
@@ -33,7 +39,7 @@ public class LockerRobotManager {
         return null;
     }
 
-    public Bag pickUp(Ticket ticket) throws InvalidTicketException {
+    public Bag pickUp(Ticket ticket, VipCard vipCard) throws InvalidTicketException {
         if (ticket.getType() == BagType.S) {
             return locker.pickUp(ticket);
         } else if (ticket.getType() == BagType.M) {
