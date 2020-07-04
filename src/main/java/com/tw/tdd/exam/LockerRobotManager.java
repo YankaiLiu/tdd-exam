@@ -28,25 +28,13 @@ public class LockerRobotManager {
         if (vipCard == null) {
             throw new NotVipException(ExceptionMessages.IS_NOT_VIP);
         }
-
-        if (bag.getType() == BagType.S) {
-            return locker.store(bag);
-        } else if (bag.getType() == BagType.M) {
-            return primaryLockerRobot.store(bag);
-        } else if (bag.getType() == BagType.L) {
-            return superLockerRobot.store(bag);
-        }
-        return null;
+       return LockerRobotService.getTicket(bag, locker, primaryLockerRobot, superLockerRobot);
     }
 
-    public Bag pickUp(Ticket ticket, VipCard vipCard) throws InvalidTicketException {
-        if (ticket.getType() == BagType.S) {
-            return locker.pickUp(ticket);
-        } else if (ticket.getType() == BagType.M) {
-            return primaryLockerRobot.pickUp(ticket);
-        } else if (ticket.getType() == BagType.L) {
-            return superLockerRobot.pickUp(ticket);
+    public Bag pickUp(Ticket ticket, VipCard vipCard) throws InvalidTicketException, NotVipException {
+        if (vipCard == null) {
+            throw new NotVipException(ExceptionMessages.IS_NOT_VIP);
         }
-        throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
+        return LockerRobotService.getBag(ticket, locker, primaryLockerRobot, superLockerRobot);
     }
 }

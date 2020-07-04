@@ -24,25 +24,11 @@ public class Waitress {
     }
 
     public Ticket store(Bag bag) throws StoreException {
-        if (bag.getType() == BagType.S) {
-            return locker.store(bag);
-        } else if (bag.getType() == BagType.M) {
-            return primaryLockerRobot.store(bag);
-        } else if (bag.getType() == BagType.L) {
-            return superLockerRobot.store(bag);
-        }
-        return null;
+        return LockerRobotService.getTicket(bag, locker, primaryLockerRobot, superLockerRobot);
     }
 
     public Bag pickUp(Ticket ticket) throws InvalidTicketException {
-        if (ticket.getType() == BagType.S) {
-            return locker.pickUp(ticket);
-        } else if (ticket.getType() == BagType.M) {
-            return primaryLockerRobot.pickUp(ticket);
-        } else if (ticket.getType() == BagType.L) {
-            return superLockerRobot.pickUp(ticket);
-        }
-        throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
+        return LockerRobotService.getBag(ticket, locker, primaryLockerRobot, superLockerRobot);
     }
 
     public void makeMistake(Ticket ticket) throws TicketTypeIncorrectException {

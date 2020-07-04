@@ -169,7 +169,7 @@ public class VIPCustomerTest {
 
     @Test
     public void should_reminder_invalid_ticket_when_vip_pick_up_bag_given_invalid_ticket() throws StoreException,
-            InvalidTicketException, IncorrectLockerTypeException {
+            InvalidTicketException, IncorrectLockerTypeException, NotVipException {
 
 
         thrown.expect(InvalidTicketException.class);
@@ -203,7 +203,7 @@ public class VIPCustomerTest {
     }
 
     @Test
-    public void should_reminder_is_not_vip_when_pick_up_bag_given_is_not_vip() throws StoreException, NotVipException {
+    public void should_reminder_is_not_vip_when_pick_up_bag_given_is_not_vip() throws NotVipException, InvalidTicketException {
 
         thrown.expect(NotVipException.class);
         thrown.expectMessage(ExceptionMessages.IS_NOT_VIP);
@@ -212,8 +212,8 @@ public class VIPCustomerTest {
         LockerRobotManager lockerRobotManager = new LockerRobotManager();
         lockerRobotManager.manage(lockerS);
 
-        Bag bag = new Bag(BagType.S);
-        Ticket ticket = lockerRobotManager.store(bag, null);
+        lockerRobotManager.pickUp(new Ticket(LockerType.S), null);
+
     }
 
 
