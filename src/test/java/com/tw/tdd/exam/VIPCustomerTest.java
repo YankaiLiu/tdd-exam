@@ -204,4 +204,18 @@ public class VIPCustomerTest {
         Bag bag = new Bag(BagType.S);
         Ticket ticket = lockerRobotManager.store(bag, null);
     }
+
+    @Test
+    public void should_reminder_is_not_vip_when_pick_up_bag_given_is_not_vip() throws StoreException, NotVipException {
+
+        thrown.expect(NotVipException.class);
+        thrown.expectMessage(ExceptionMessages.IS_NOT_VIP);
+
+        Locker lockerS = new Locker(LockerType.S, 10);
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manage(lockerS);
+
+        Bag bag = new Bag(BagType.S);
+        Ticket ticket = lockerRobotManager.store(bag, null);
+    }
 }
