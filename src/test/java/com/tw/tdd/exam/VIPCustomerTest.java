@@ -93,4 +93,22 @@ public class VIPCustomerTest {
         Assert.assertTrue(superLockerRobot.getLockers().get(1).containBag(ticket));
     }
 
+    @Test
+    public void should_reminder_has_no_capacity_when_vip_save_bag_given_l_bag_and_locker_robot_manage_one_locker_l_and_has_no_capacity() throws StoreException {
+
+        thrown.expect(StoreException.class);
+        thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
+
+        Locker lockerL1 = new Locker(LockerType.L, 0);
+        Locker lockerL2 = new Locker(LockerType.L, 0);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manage(superLockerRobot);
+
+        lockerRobotManager.store(new Bag(BagType.L));
+    }
+
 }
