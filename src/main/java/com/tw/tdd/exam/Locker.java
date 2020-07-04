@@ -32,4 +32,14 @@ public class Locker {
     public boolean containBag(Ticket ticket) {
         return storedBags.get(ticket) != null;
     }
+
+    public double vacancyRate() {
+        //这里的空置率 = 可用容量 / 容量
+        if (capacity == 0 || capacity == storedBags.size()) {
+            return 0;
+        } else if (capacity - storedBags.size() == capacity) {
+            return 1;
+        }
+        return ((double)(capacity - storedBags.size())) /  (double)capacity;
+    }
 }

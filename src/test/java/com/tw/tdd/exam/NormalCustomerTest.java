@@ -41,17 +41,17 @@ public class NormalCustomerTest {
 
         Locker lockerM1 = new Locker(LockerType.M, 10);
         Locker lockerM2 = new Locker(LockerType.M, 10);
-        PrimaryRobot primaryRobot = new PrimaryRobot();
-        primaryRobot.manage(lockerM1);
-        primaryRobot.manage(lockerM2);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.manage(lockerM1);
+        primaryLockerRobot.manage(lockerM2);
 
         Waitress waitress = new Waitress();
-        waitress.manage(primaryRobot);
+        waitress.manage(primaryLockerRobot);
 
         Bag bag = new Bag(BagType.M);
         Ticket ticket = waitress.store(bag);
         Assert.assertEquals(LockerType.M, ticket.getType());
-        Assert.assertTrue(primaryRobot.getLockers().get(0).containBag(ticket));
+        Assert.assertTrue(primaryLockerRobot.getLockers().get(0).containBag(ticket));
     }
 
     @Test
@@ -59,17 +59,17 @@ public class NormalCustomerTest {
 
         Locker lockerM1 = new Locker(LockerType.M, 0);
         Locker lockerM2 = new Locker(LockerType.M, 10);
-        PrimaryRobot primaryRobot = new PrimaryRobot();
-        primaryRobot.manage(lockerM1);
-        primaryRobot.manage(lockerM2);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.manage(lockerM1);
+        primaryLockerRobot.manage(lockerM2);
 
         Waitress waitress = new Waitress();
-        waitress.manage(primaryRobot);
+        waitress.manage(primaryLockerRobot);
 
         Bag bag = new Bag(BagType.M);
         Ticket ticket = waitress.store(bag);
         Assert.assertEquals(LockerType.M, ticket.getType());
-        Assert.assertTrue(primaryRobot.getLockers().get(1).containBag(ticket));
+        Assert.assertTrue(primaryLockerRobot.getLockers().get(1).containBag(ticket));
     }
 
     @Test
@@ -80,16 +80,34 @@ public class NormalCustomerTest {
 
         Locker lockerM1 = new Locker(LockerType.M, 0);
         Locker lockerM2 = new Locker(LockerType.M, 0);
-        PrimaryRobot primaryRobot = new PrimaryRobot();
-        primaryRobot.manage(lockerM1);
-        primaryRobot.manage(lockerM2);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.manage(lockerM1);
+        primaryLockerRobot.manage(lockerM2);
 
         Waitress waitress = new Waitress();
-        waitress.manage(primaryRobot);
+        waitress.manage(primaryLockerRobot);
 
         waitress.store(new Bag(BagType.M));
     }
 
+    @Test
+    public void should_return_l_ticket_and_save_into_the_locker_which_one_has_bigger_variance_rate_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker() throws StoreException {
 
+        Locker lockerL1 = new Locker(LockerType.L, 10);
+        Locker lockerL2 = new Locker(LockerType.L, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(superLockerRobot);
+
+        waitress.store( new Bag(BagType.L));
+
+        Bag bag = new Bag(BagType.L);
+        Ticket ticket = waitress.store(bag);
+        Assert.assertEquals(LockerType.L, ticket.getType());
+        Assert.assertTrue(superLockerRobot.getLockers().get(1).containBag(ticket));
+    }
 
 }

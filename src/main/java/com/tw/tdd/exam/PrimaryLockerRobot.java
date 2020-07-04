@@ -6,10 +6,10 @@ import exception.StoreException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrimaryRobot {
+public class PrimaryLockerRobot {
 
     private List<Locker> lockers;
-    public PrimaryRobot() {
+    public PrimaryLockerRobot() {
         lockers = new ArrayList<>();
     }
 
