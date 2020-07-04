@@ -51,4 +51,8 @@ public class Locker {
 
         throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
     }
+
+    public String getType() {
+        return type;
+    }
 }

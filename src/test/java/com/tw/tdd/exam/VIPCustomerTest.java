@@ -1,9 +1,6 @@
 package com.tw.tdd.exam;
 
-import exception.ExceptionMessages;
-import exception.InvalidTicketException;
-import exception.NotVipException;
-import exception.StoreException;
+import exception.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,7 +37,7 @@ public class VIPCustomerTest {
     }
 
     @Test
-    public void should_return_m_ticket_when_vip_save_bag_given_m_bag_and_locker_robot_manage_one_locker_m_and_has_capacity() throws StoreException, NotVipException {
+    public void should_return_m_ticket_when_vip_save_bag_given_m_bag_and_locker_robot_manage_one_locker_m_and_has_capacity() throws StoreException, NotVipException, IncorrectLockerTypeException {
 
         Locker lockerM1 = new Locker(LockerType.M, 10);
         Locker lockerM2 = new Locker(LockerType.M, 10);
@@ -58,7 +55,7 @@ public class VIPCustomerTest {
     }
 
     @Test
-    public void should_reminder_has_no_capacity_when_vip_save_bag_given_m_bag_and_locker_robot_manage_one_locker_m_and_has_no_capacity() throws StoreException, NotVipException {
+    public void should_reminder_has_no_capacity_when_vip_save_bag_given_m_bag_and_locker_robot_manage_one_locker_m_and_has_no_capacity() throws StoreException, NotVipException, IncorrectLockerTypeException {
 
         thrown.expect(StoreException.class);
         thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
@@ -130,7 +127,7 @@ public class VIPCustomerTest {
 
     @Test
     public void should_get_bag_when_vip_pick_up_bag_given_valid_m_ticket() throws StoreException,
-            InvalidTicketException, NotVipException {
+            InvalidTicketException, NotVipException, IncorrectLockerTypeException {
 
         Locker lockerM1 = new Locker(LockerType.M, 10);
         Locker lockerM2 = new Locker(LockerType.M, 10);
@@ -218,4 +215,6 @@ public class VIPCustomerTest {
         Bag bag = new Bag(BagType.S);
         Ticket ticket = lockerRobotManager.store(bag, null);
     }
+
+
 }

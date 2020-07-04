@@ -25,8 +25,10 @@
 18.  Given：VIP顾客， 有效的票据，LockerRobotManager，去票据对应的型号的Locker取包；When：取包；Then：取包成功，回收票据
 19. Given：VIP顾客，无效的票据，LockerRobotManager；When：取包；Then：取票失败，提示无效的票据。
 20. Given: 非VIP顾客，When: 取包；Then：取包失败，提示非VIP顾客
-21. Given超市管理员配置S类型的Locker到PrimaryLockerRobot; When 配置Robot；Then：提示Locker类型不对；
-22. LockerRobotManager配置S类型的Locker到PrimaryLockerRobot; When 配置Robot；Then：提示Locker类型不对；
+21. 配置非M类型的Locker到PrimaryLockerRobot; When 配置Robot；Then：提示Locker类型不对；
+22. 配置非L类型的Locker到SuperLockerRobot; When 配置Robot；Then：提示Locker类型不对；
+
+
 
 
 

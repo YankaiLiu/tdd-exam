@@ -1,8 +1,5 @@
 package com.tw.tdd.exam;
-import exception.ExceptionMessages;
-import exception.InvalidTicketException;
-import exception.StoreException;
-import exception.TicketTypeIncorrectException;
+import exception.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -39,7 +36,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_return_m_ticket_and_save_into_1st_locker_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_all_has_capacity() throws StoreException {
+    public void should_return_m_ticket_and_save_into_1st_locker_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_all_has_capacity() throws StoreException, IncorrectLockerTypeException {
 
         Locker lockerM1 = new Locker(LockerType.M, 10);
         Locker lockerM2 = new Locker(LockerType.M, 10);
@@ -57,7 +54,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_return_m_ticket_and_save_into_2nd_locker_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_1st_is_full_2nd_has_capacity() throws StoreException {
+    public void should_return_m_ticket_and_save_into_2nd_locker_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_1st_is_full_2nd_has_capacity() throws StoreException, IncorrectLockerTypeException {
 
         Locker lockerM1 = new Locker(LockerType.M, 0);
         Locker lockerM2 = new Locker(LockerType.M, 10);
@@ -75,7 +72,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_reminder_has_no_capacity_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_all_lockers_has_no_capacity() throws StoreException {
+    public void should_reminder_has_no_capacity_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_all_lockers_has_no_capacity() throws StoreException, IncorrectLockerTypeException {
 
         thrown.expect(StoreException.class);
         thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
@@ -146,7 +143,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_get_bag_when_pick_up_bag_given_valid_m_ticket() throws StoreException, InvalidTicketException {
+    public void should_get_bag_when_pick_up_bag_given_valid_m_ticket() throws StoreException, InvalidTicketException, IncorrectLockerTypeException {
 
         Locker lockerM1 = new Locker(LockerType.M, 10);
         Locker lockerM2 = new Locker(LockerType.M, 10);
@@ -229,5 +226,17 @@ public class NormalCustomerTest {
         waitress.pickUp(ticket);
 
     }
+
+    @Test
+    public void should_reminder_incorrect_locker_type_when_manage_primary_robot_give_locker_s() throws IncorrectLockerTypeException {
+
+        thrown.expect(IncorrectLockerTypeException.class);
+        thrown.expectMessage(ExceptionMessages.INCORRECT_LOCKER_TYPE);
+
+        Locker lockerS = new Locker(LockerType.S, 10);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
+        primaryLockerRobot.manage(lockerS);
+    }
+
 
 }
