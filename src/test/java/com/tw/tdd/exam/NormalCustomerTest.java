@@ -90,7 +90,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_return_l_ticket_and_save_into_the_locker_which_one_has_bigger_variance_rate_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker() throws StoreException {
+    public void should_return_l_ticket_and_save_into_the_locker_which_one_has_bigger_variance_rate_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker() throws StoreException, IncorrectLockerTypeException {
 
 
         Locker lockerL1 = new Locker(LockerType.L, 10);
@@ -111,7 +111,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_reminder_has_no_capacity_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker_and_all_lockers_has_no_capacity() throws StoreException {
+    public void should_reminder_has_no_capacity_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker_and_all_lockers_has_no_capacity() throws StoreException, IncorrectLockerTypeException {
 
         thrown.expect(StoreException.class);
         thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
@@ -162,7 +162,7 @@ public class NormalCustomerTest {
     }
 
     @Test
-    public void should_get_bag_when_pick_up_bag_given_valid_l_ticket() throws StoreException, InvalidTicketException {
+    public void should_get_bag_when_pick_up_bag_given_valid_l_ticket() throws StoreException, InvalidTicketException, IncorrectLockerTypeException {
 
         Locker lockerL1 = new Locker(LockerType.L, 10);
         Locker lockerL2 = new Locker(LockerType.L, 10);
@@ -184,7 +184,7 @@ public class NormalCustomerTest {
 
     @Test
     public void should_reminder_ticket_type_is_incorrect_when_pick_up_bag_given_valid_ticket_but_incorrect_ticket_type() throws StoreException,
-            InvalidTicketException, TicketTypeIncorrectException {
+            InvalidTicketException, TicketTypeIncorrectException, IncorrectLockerTypeException {
 
 
         thrown.expect(TicketTypeIncorrectException.class);
@@ -207,7 +207,7 @@ public class NormalCustomerTest {
 
     @Test
     public void should_reminder_invalid_ticket_when_pick_up_bag_given_invalid_ticket() throws StoreException,
-            InvalidTicketException {
+            InvalidTicketException, IncorrectLockerTypeException {
 
 
         thrown.expect(InvalidTicketException.class);
@@ -236,6 +236,17 @@ public class NormalCustomerTest {
         Locker lockerS = new Locker(LockerType.S, 10);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot();
         primaryLockerRobot.manage(lockerS);
+    }
+
+    @Test
+    public void should_reminder_incorrect_locker_type_when_manage_super_robot_give_locker_m() throws IncorrectLockerTypeException {
+
+        thrown.expect(IncorrectLockerTypeException.class);
+        thrown.expectMessage(ExceptionMessages.INCORRECT_LOCKER_TYPE);
+
+        Locker lockerM = new Locker(LockerType.M, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerM);
     }
 
 

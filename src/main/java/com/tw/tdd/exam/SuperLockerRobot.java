@@ -1,6 +1,7 @@
 package com.tw.tdd.exam;
 
 import exception.ExceptionMessages;
+import exception.IncorrectLockerTypeException;
 import exception.InvalidTicketException;
 import exception.StoreException;
 
@@ -14,7 +15,10 @@ public class SuperLockerRobot {
         lockers = new ArrayList<>();
     }
 
-    public void manage(Locker locker) {
+    public void manage(Locker locker) throws IncorrectLockerTypeException {
+        if (locker.getType() != LockerType.L) {
+            throw new IncorrectLockerTypeException(ExceptionMessages.INCORRECT_LOCKER_TYPE);
+        }
         lockers.add(locker);
     }
 

@@ -73,7 +73,7 @@ public class VIPCustomerTest {
     }
 
     @Test
-    public void should_return_l_ticket_when_vip_save_bag_given_l_bag_and_locker_robot_manage_one_locker_l_and_has_capacity() throws StoreException, NotVipException {
+    public void should_return_l_ticket_when_vip_save_bag_given_l_bag_and_locker_robot_manage_one_locker_l_and_has_capacity() throws StoreException, NotVipException, IncorrectLockerTypeException {
 
         Locker lockerL1 = new Locker(LockerType.L, 10);
         Locker lockerL2 = new Locker(LockerType.L, 10);
@@ -93,7 +93,7 @@ public class VIPCustomerTest {
     }
 
     @Test
-    public void should_reminder_has_no_capacity_when_vip_save_bag_given_l_bag_and_locker_robot_manage_one_locker_l_and_has_no_capacity() throws StoreException, NotVipException {
+    public void should_reminder_has_no_capacity_when_vip_save_bag_given_l_bag_and_locker_robot_manage_one_locker_l_and_has_no_capacity() throws StoreException, NotVipException, IncorrectLockerTypeException {
 
         thrown.expect(StoreException.class);
         thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
@@ -147,7 +147,7 @@ public class VIPCustomerTest {
 
     @Test
     public void should_get_bag_when_vip_pick_up_bag_given_valid_l_ticket() throws StoreException,
-            InvalidTicketException, NotVipException {
+            InvalidTicketException, NotVipException, IncorrectLockerTypeException {
 
         Locker lockerL1 = new Locker(LockerType.L, 10);
         Locker lockerL2 = new Locker(LockerType.L, 10);
@@ -169,7 +169,7 @@ public class VIPCustomerTest {
 
     @Test
     public void should_reminder_invalid_ticket_when_vip_pick_up_bag_given_invalid_ticket() throws StoreException,
-            InvalidTicketException {
+            InvalidTicketException, IncorrectLockerTypeException {
 
 
         thrown.expect(InvalidTicketException.class);
