@@ -1,5 +1,8 @@
 package com.tw.tdd.exam;
 
+import exception.ExceptionMessages;
+import exception.StoreException;
+
 import java.util.HashMap;
 
 public class Locker {
@@ -13,13 +16,13 @@ public class Locker {
         this.capacity = capacity;
     }
 
-    public Ticket store(Bag bag) {
+    public Ticket store(Bag bag) throws StoreException {
         if (isNotFull()) {
             Ticket ticket =  new Ticket(this.type);
             storedBags.put(ticket,bag);
             return ticket;
         }
-        return null;
+        throw new StoreException(ExceptionMessages.HAS_NO_CAPACITY);
     }
 
     public boolean isNotFull() {
