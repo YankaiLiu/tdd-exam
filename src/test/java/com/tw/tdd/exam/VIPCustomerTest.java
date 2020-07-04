@@ -73,4 +73,24 @@ public class VIPCustomerTest {
         lockerRobotManager.store(new Bag(BagType.M));
     }
 
+    @Test
+    public void should_return_l_ticket_when_vip_save_bag_given_l_bag_and_locker_robot_manage_one_locker_l_and_has_capacity() throws StoreException {
+
+        Locker lockerL1 = new Locker(LockerType.L, 10);
+        Locker lockerL2 = new Locker(LockerType.L, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manage(superLockerRobot);
+
+        lockerRobotManager.store( new Bag(BagType.L));
+
+        Bag bag = new Bag(BagType.L);
+        Ticket ticket = lockerRobotManager.store(bag);
+        Assert.assertEquals(LockerType.L, ticket.getType());
+        Assert.assertTrue(superLockerRobot.getLockers().get(1).containBag(ticket));
+    }
+
 }
