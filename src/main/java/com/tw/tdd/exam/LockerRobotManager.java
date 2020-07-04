@@ -1,5 +1,7 @@
 package com.tw.tdd.exam;
 
+import exception.ExceptionMessages;
+import exception.InvalidTicketException;
 import exception.StoreException;
 
 public class LockerRobotManager {
@@ -29,5 +31,16 @@ public class LockerRobotManager {
             return superLockerRobot.store(bag);
         }
         return null;
+    }
+
+    public Bag pickUp(Ticket ticket) throws InvalidTicketException {
+        if (ticket.getType() == BagType.S) {
+            return locker.pickUp(ticket);
+        } else if (ticket.getType() == BagType.M) {
+            return primaryLockerRobot.pickUp(ticket);
+        } else if (ticket.getType() == BagType.L) {
+            return superLockerRobot.pickUp(ticket);
+        }
+        throw new InvalidTicketException(ExceptionMessages.INVALID_TICKET);
     }
 }
