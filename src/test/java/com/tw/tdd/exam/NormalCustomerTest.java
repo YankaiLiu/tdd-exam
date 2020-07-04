@@ -93,6 +93,7 @@ public class NormalCustomerTest {
     @Test
     public void should_return_l_ticket_and_save_into_the_locker_which_one_has_bigger_variance_rate_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker() throws StoreException {
 
+
         Locker lockerL1 = new Locker(LockerType.L, 10);
         Locker lockerL2 = new Locker(LockerType.L, 10);
         SuperLockerRobot superLockerRobot = new SuperLockerRobot();
@@ -108,6 +109,24 @@ public class NormalCustomerTest {
         Ticket ticket = waitress.store(bag);
         Assert.assertEquals(LockerType.L, ticket.getType());
         Assert.assertTrue(superLockerRobot.getLockers().get(1).containBag(ticket));
+    }
+
+    @Test
+    public void should_reminder_has_no_capacity_when_save_bag_given_l_bag_and_waitress_manage_super_robot_locker_and_robot_manage_two_l_locker_and_all_lockers_has_no_capacity() throws StoreException {
+
+        thrown.expect(StoreException.class);
+        thrown.expectMessage(ExceptionMessages.HAS_NO_CAPACITY);
+
+        Locker lockerL1 = new Locker(LockerType.L, 0);
+        Locker lockerL2 = new Locker(LockerType.L, 0);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(superLockerRobot);
+
+        waitress.store( new Bag(BagType.L));
     }
 
 }
