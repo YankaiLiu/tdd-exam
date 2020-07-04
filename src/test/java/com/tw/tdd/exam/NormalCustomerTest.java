@@ -55,5 +55,24 @@ public class NormalCustomerTest {
         Assert.assertTrue(primaryRobot.getLockers().get(0).containBag(ticket));
     }
 
+    @Test
+    public void should_return_m_ticket_and_save_into_2nd_locker_when_save_bag_given_m_bag_and_waitress_manage_primary_robot_locker_and_robot_manage_two_m_locker_and_1st_is_full_2nd_has_capacity() throws StoreException {
+
+        Locker lockerM1 = new Locker(LockerType.M, 0);
+        Locker lockerM2 = new Locker(LockerType.M, 10);
+        PrimaryRobot primaryRobot = new PrimaryRobot();
+        primaryRobot.manage(lockerM1);
+        primaryRobot.manage(lockerM2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(primaryRobot);
+
+        Bag bag = new Bag(BagType.M);
+        Ticket ticket = waitress.store(bag);
+        Assert.assertEquals(LockerType.M, ticket.getType());
+        Assert.assertTrue(primaryRobot.getLockers().get(1).containBag(ticket));
+    }
+
+
 
 }
