@@ -147,4 +147,28 @@ public class VIPCustomerTest {
         Assert.assertNotNull(pickedBag);
     }
 
+    @Test
+    public void should_get_bag_when_vip_pick_up_bag_given_valid_l_ticket() throws StoreException,
+            InvalidTicketException {
+
+        Locker lockerL1 = new Locker(LockerType.L, 10);
+        Locker lockerL2 = new Locker(LockerType.L, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        LockerRobotManager lockerRobotManager = new LockerRobotManager();
+        lockerRobotManager.manage(superLockerRobot);
+
+        lockerRobotManager.store( new Bag(BagType.L));
+
+        Bag bag = new Bag(BagType.L);
+        Ticket ticket = lockerRobotManager.store(bag);
+        Bag pickedBag = lockerRobotManager.pickUp(ticket);
+
+        Assert.assertNotNull(pickedBag);
+    }
+
+
+
 }
