@@ -208,4 +208,26 @@ public class NormalCustomerTest {
         waitress.makeMistake(ticket);
     }
 
+    @Test
+    public void should_reminder_invalid_ticket_when_pick_up_bag_given_invalid_ticket() throws StoreException,
+            InvalidTicketException {
+
+
+        thrown.expect(InvalidTicketException.class);
+        thrown.expectMessage(ExceptionMessages.INVALID_TICKET);
+
+        Locker lockerL1 = new Locker(LockerType.L, 10);
+        Locker lockerL2 = new Locker(LockerType.L, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(superLockerRobot);
+        Ticket ticket = new Ticket(BagType.L);
+
+        waitress.pickUp(ticket);
+
+    }
+
 }
