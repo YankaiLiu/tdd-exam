@@ -12,19 +12,33 @@
 
 6. Given：L尺寸的包，小樱，SuperLockerRobot，SuperLockerRobot管理两个L型号的Locker，Lcoker都还有空柜子； When 存包； Then: 存包成功，存在空置率大的柜子，返回S型号票据
 
-8. Given：L尺寸的包，小樱，SuperLockerRobot，SuperLockerRobot管理两个L型号的Locker，两个Locker都已存满； When 存包； Then: 存包失败，提示柜子已
+8. Given：L尺寸的包，小樱，SuperLockerRobot，SuperLockerRobot管理两个L型号的Locker，两个Locker都已存满； When 存包； Then: 存包失败，提示柜子已满
 
-9. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），Locker还有空柜子； When： 存包；Then： 存包成功，返回S型号票据。
-10. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），Locker没有空柜子； When： 存包；Then： 存包失败，提示柜子已存满。
-11. Given：VIP顾客， M型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），PrimaryLockerRobot管理的Locker还有空柜子； When： 存包；Then： 存包成功，返回M型号票据。
-12. Given：VIP顾客， M型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），PrimaryLockerRobot管理的Locker没有空柜子； When： 存包；Then： 存包失败，提示柜子已存满。
-13. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），SuperLockerRobot管理的Locker还有空柜子； When： 存包；Then： 存包成功，返回M型号票据。
-14. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），SuperLockerRobot管理的Locker没有空柜子； When： 存包；Then： 存包失败，提示柜子已存满。
-15.  Given：VIP的顾客， 有效的票据，LockerRobotManager，去票据对应的型号的Locker取包；When：取包；Then：取包成功，回收票据
-16. Given：无效的票据，LockerRobotManager；When：取包；Then：取票失败，提示无效的票据。
-17. Given：有效的票据，小樱，小樱没有犯错，去票据对应的型号的Locker取包；When：取包；Then：取包成功，回收票据
-18. Given：有效的票据，小樱，小樱出错了，没有去票据对应型号的Locker取包；When：取包；Then：取包失败，提示票的型号不对
-19. Given：无效的票据，小樱；When：取包；Then：取票失败，提示无效的票据。
+9. Given：有效的票据，小樱，小樱没有犯错，去票据对应的型号的Locker取包；When：取包；Then：取包成功，回收票据
+
+10. Given：有效的票据，小樱，小樱出错了，没有去票据对应型号的Locker取包；When：取包；Then：取包失败，提示票的型号不对
+
+11. Given：无效的票据，小樱；When：取包；Then：取票失败，提示无效的票据。
+
+12. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），Locker还有空柜子； When： 存包；Then： 存包成功，返回S型号票据。
+
+    
+
+13. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），Locker没有空柜子； When： 存包；Then： 存包失败，提示柜子已存满。
+
+14. Given：VIP顾客， M型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），PrimaryLockerRobot管理的Locker还有空柜子； When： 存包；Then： 存包成功，返回M型号票据。
+
+15. Given：VIP顾客， M型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），PrimaryLockerRobot管理的Locker没有空柜子； When： 存包；Then： 存包失败，提示柜子已存满。
+
+16. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），SuperLockerRobot管理的Locker还有空柜子； When： 存包；Then： 存包成功，返回M型号票据。
+
+17. Given：VIP顾客， S型号的包，LockerRobotManager，LockerRobotManager管理一个 Locker（S号）、一个PrimaryLockerRobot（M号）、一个SuperLockerRobot（L号），SuperLockerRobot管理的Locker没有空柜子； When： 存包；Then： 存包失败，提示柜子已存满。
+
+18.  Given：VIP顾客， 有效的票据，LockerRobotManager，去票据对应的型号的Locker取包；When：取包；Then：取包成功，回收票据
+
+19. Given：VIP顾客，无效的票据，LockerRobotManager；When：取包；Then：取票失败，提示无效的票据。
+
+
 
 
 
