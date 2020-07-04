@@ -163,4 +163,25 @@ public class NormalCustomerTest {
         Assert.assertNotNull(pickedBag);
     }
 
+    @Test
+    public void should_get_bag_when_pick_up_bag_given_valid_l_ticket() throws StoreException, InvalidTicketException {
+
+        Locker lockerL1 = new Locker(LockerType.L, 10);
+        Locker lockerL2 = new Locker(LockerType.L, 10);
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot();
+        superLockerRobot.manage(lockerL1);
+        superLockerRobot.manage(lockerL2);
+
+        Waitress waitress = new Waitress();
+        waitress.manage(superLockerRobot);
+
+        waitress.store( new Bag(BagType.L));
+
+        Bag bag = new Bag(BagType.L);
+        Ticket ticket = waitress.store(bag);
+        Bag pickedBag = waitress.pickUp(ticket);
+
+        Assert.assertNotNull(pickedBag);
+    }
+
 }
